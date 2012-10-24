@@ -1,0 +1,42 @@
+!!! 5
+html
+    head
+        title Checkout button with MD5 hash, using AJAX - Form
+
+    body
+
+        form(action="md5-generator", method="post", enctype="application/x-www-form-urlencoded")
+            // Required authentication. Get the CLIENT_ID: 
+            // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
+            // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes  
+            input(type="hidden",name="client_id",value="CLIENT_ID")
+        
+            // Hash MD5
+            input(type="hidden", name="key", value=md5)
+           
+            // Required
+            input(type="hidden", name="item_title", value="Title")
+            label(for="item_quantity") Quantity:
+            select(name="item_quantity")
+                option(value="1") 1
+                option(value="2") 2
+                option(value="5") 5
+                option(value="10") 10
+            input(type="hidden", name="item_currency_id", value="ARS")
+            input(type="hidden", name="item_unit_price", value="10.00")
+           
+            // Optional
+            input(type="hidden", name="item_id", value="CODE_012")
+            input(type="hidden", name="external_reference", value="BILL_001")
+            input(type="hidden", name="item_picture_url", value="Image URL")
+            input(type="hidden", name="payer_name", value="")
+            input(type="hidden", name="payer_surname", value="")
+            input(type="hidden", name="payer_email", value="")
+            input(type="hidden", name="back_url_success", value="https://www.success.com")
+            input(type="hidden", name="back_url_pending", value="")
+           
+            // Checkout Button
+            button.lightblue-rn-m-tr-arall(type="submit", name="MP-payButton") Pay
+        
+        // More info about render.js: https://developers.mercadopago.com
+        script(type="text/javascript", src="http://mp-tools.mlstatic.com/buttons/render.beta.js")
