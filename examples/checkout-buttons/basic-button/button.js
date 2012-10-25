@@ -17,9 +17,7 @@ exports.run = function (req, res) {
         "payer_surname": "",
         "payer_email": "",
         "back_url_success": "https://www.success.com",
-        "back_url_pending": "",
-        "excluded_payment_methods_id": "",
-        "excluded_payment_types_id": "",
+        "back_url_pending": ""
     };
 
     string md5String =  "CLIENT_ID"+                    
@@ -29,10 +27,7 @@ exports.run = function (req, res) {
                         data.item_unit_price+                // item_unit_price
 
                         data.item_id+                        // item_id
-                        data.external_reference+             // external_reference
-                        data.excluded_payment_types_id+      // excluded_payment_types_id
-                        data.excluded_payment_methods_id+    // excluded_payment_methods_id
-                        data.credit_card_installments;       // credit_card_installments
+                        data.external_reference;             // external_reference
 
     // Get md5 hash
     var md5 = MD5(md5String);

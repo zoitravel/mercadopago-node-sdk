@@ -5,14 +5,14 @@ html
 
     body
 
-        form(action="https://www.mercadopago.com/unified/MD5/checkout/pay", method="post", enctype="application/x-www-form-urlencoded")
+        form(action="https://www.mercadopago.com/checkout/init", method="post", enctype="application/x-www-form-urlencoded")
             // Required authentication. Get the CLIENT_ID: 
             // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
             // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes  
             input(type="hidden",name="client_id",value="CLIENT_ID")
         
             // Hash MD5
-            input(type="hidden", name="key", value=md5)
+            input(type="hidden", name="md5", value=md5)
            
             // Required
             input(type="hidden", name="item_title", value=data.item_title)
