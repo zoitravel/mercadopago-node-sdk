@@ -121,10 +121,10 @@ vows
                         _self.callback(true, resp);
                     });
             },
-            "status 201": function (err, resp) {
+            "status 200": function (err, resp) {
                 assert.isNull(err);
 
-                assert.equal(resp.updateStatus, 201);
+                assert.equal(resp.updateStatus, 200);
             },
             "preference data": function (err, resp) {
                 assert.isNull(err);

@@ -1,18 +1,19 @@
-# Mercadopago SDK module for Payments integration
+# MercadoPago SDK module for Payments integration
 
 * [Usage](#usage)
-* [Using Mercadopago Checkout](#checkout)
-* [Using Mercadopago Payment collection](#payments)
+* [Using MercadoPago Checkout](#checkout)
+* [Using MercadoPago Payment collection](#payments)
 
 <a name="usage"></a>
-### Usage:
+## Usage:
 
 ```
 $ npm install mercadopago
 ```
 
-* Get your credentials at [Mercadopago Developers Site](https://developers.mercadopago.com/beta/api-de-checkout#get-credentials).
-* Replace your CLIENT_ID and CLIENT_SECRET.
+* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
+	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
+	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
 
 ```javascript
 var MP = require ("mercadopago");
@@ -21,9 +22,9 @@ var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
 <a name="checkout"></a>
-### Using Mercadopago Checkout
+## Using MercadoPago Checkout
 
-Create a Checkout preference:
+### Create a Checkout preference:
 
 ```javascript
 var preference = {
@@ -46,7 +47,7 @@ mp.createPreference (preference, function (err, data){
     });
 ```
 
-Get an existent Checkout preference:
+### Get an existent Checkout preference:
 
 ```javascript
 mp.getPreference ("PREFERENCE_ID", function (err, data){
@@ -58,7 +59,7 @@ mp.getPreference ("PREFERENCE_ID", function (err, data){
     });
 ```
 
-Update an existent Checkout preference:
+### Update an existent Checkout preference:
 
 ```javascript
 var preference = {
@@ -82,7 +83,7 @@ mp.updatePreference ("PREFERENCE_ID", preference, function (err, data){
 ```
 
 <a name="payments"></a>
-### Using Mercadopago Payment
+## Using MercadoPago Payment
 
 Searching:
 
@@ -102,7 +103,11 @@ mp.searchPayment (filters, function (err, data){
     });
 ```
 
-Receiving IPN notification:
+### Receiving IPN notification:
+
+* Go to **Mercadopago IPN configuration**:
+	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
+	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)<br />
 
 ```javascript
 var MP = require ("mercadopago"),
@@ -136,7 +141,7 @@ function onRequest(request, response) {
 http.createServer(onRequest).listen(8888);
 ```
 
-Cancel (only for pending payments):
+### Cancel (only for pending payments):
 
 ```javascript
 mp.cancelPayment ("ID", function (err, data){
@@ -148,7 +153,7 @@ mp.cancelPayment ("ID", function (err, data){
     });
 ```
 
-Refund (only for accredited payments):
+### Refund (only for accredited payments):
 
 ```javascript
 mp.refundPayment ("ID", function (err, data){
