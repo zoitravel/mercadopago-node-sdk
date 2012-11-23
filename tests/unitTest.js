@@ -3,6 +3,14 @@ var MP      = require("mercadopago"),
     assert  = require("assert"),
     events  = require("events");
 
+var credentials = {
+    clientId: "CLIENT_ID",
+    clientSecret: "CLIENT_SECRET"
+};
+var data = {
+    prefId: "PREF_ID"
+};
+
 vows
     .describe("Unit Tests")
     .addBatch({
@@ -10,15 +18,9 @@ vows
             topic: function () {
                 var _self = this;
 
-                var mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+                var mp = new MP(credentials.clientId, credentials.clientSecret);
 
-                mp.getPreference("ID")
-                    .on("success", function (resp){
-                        _self.callback(null, resp);
-                    })
-                    .on("error", function (resp){
-                        _self.callback(true, resp);
-                    });
+                mp.getPreference(data.prefId, _self.callback);
             },
             "status 200": function (err, resp) {
                 assert.equal(resp.status, 200);
@@ -28,7 +30,7 @@ vows
             topic: function () {
                 var _self = this;
 
-                var mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+                var mp = new MP(credentials.clientId, credentials.clientSecret);
 
                 var preference = {
                   "items": [
@@ -41,13 +43,7 @@ vows
                   ]
                 };
 
-                mp.createPreference(preference)
-                    .on("success", function (resp){
-                        _self.callback(null, resp);
-                    })
-                    .on("error", function (resp){
-                        _self.callback(true, resp);
-                    });
+                mp.createPreference(preference, _self.callback);
             },
             "status 201": function (err, resp) {
                 assert.isNull(err);
@@ -67,7 +63,7 @@ vows
             topic: function () {
                 var _self = this;
 
-                var mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+                var mp = new MP(credentials.clientId, credentials.clientSecret);
 
                 var preference = {
                   "items": [
@@ -80,46 +76,38 @@ vows
                   ]
                 };
 
-                mp.createPreference(preference)
-                    .on("success", function (resp){
-                        var mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+                mp.createPreference(preference, function(err, data){
+                    assert.isNull(err);
 
-                        var preference = {
-                          "items": [
-                            {
-                              "title": "test2Modified",
-                              "quantity": 2,
-                              "currency_id": "USD",
-                              "unit_price": 100
-                            }
-                          ]
-                        };
+                    var mp = new MP(credentials.clientId, credentials.clientSecret);
 
-                        var preferenceId = resp.response.id;
+                    var preference = {
+                      "items": [
+                        {
+                          "title": "test2Modified",
+                          "quantity": 2,
+                          "currency_id": "USD",
+                          "unit_price": 100
+                        }
+                      ]
+                    };
 
-                        mp.updatePreference (preferenceId, preference)
-                            .on("success", function (resp){
-                                var updateStatus = resp.status;
+                    var preferenceId = data.response.id;
 
-                                var mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+                    mp.updatePreference (preferenceId, preference, function(err, data){
+                        assert.isNull(err);
 
-                                mp.getPreference(preferenceId)
-                                    .on("success", function (resp){
-                                        resp.updateStatus = updateStatus;
+                        var updateStatus = data.status;
 
-                                        _self.callback(null, resp);
-                                    })
-                                    .on("error", function (resp){
-                                        _self.callback(true, resp);
-                                    });
-                            })
-                            .on("error", function (resp){
-                                _self.callback(true, resp);
-                            });
-                    })
-                    .on("error", function (resp){
-                        _self.callback(true, resp);
+                        var mp = new MP(credentials.clientId, credentials.clientSecret);
+
+                        mp.getPreference(preferenceId, function(err, data){
+                            data.updateStatus = updateStatus;
+
+                            _self.callback(err, data);
+                        });
                     });
+                });
             },
             "status 200": function (err, resp) {
                 assert.isNull(err);

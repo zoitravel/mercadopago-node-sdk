@@ -21,6 +21,14 @@ var MP = require ("mercadopago");
 var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
+### Get your Access Token:
+
+```javascript
+mp.getAccessToken(function (err, accessToken){
+    console.log (accessToken);
+});
+```
+
 <a name="checkout"></a>
 ## Using MercadoPago Checkout
 
