@@ -55,6 +55,8 @@ mp.createPreference (preference, function (err, data){
     });
 ```
 
+<a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
+
 ### Get an existent Checkout preference:
 
 ```javascript
@@ -110,6 +112,9 @@ mp.searchPayment (filters, function (err, data){
         }
     });
 ```
+
+
+<a href="http://developers.mercadopago.com/documentacion/busqueda-de-pagos-recibidos">More search examples</a>
 
 ### Receiving IPN notification:
 
@@ -172,3 +177,4 @@ mp.refundPayment ("ID", function (err, data){
         }
     });
 ```
+<a href=http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion> About Cancel & Refund </a>
