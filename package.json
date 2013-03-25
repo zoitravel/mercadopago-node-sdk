@@ -1,6 +1,6 @@
 {
     "name" : "mercadopago",
-    "version" : "0.1.5",
+    "version" : "0.1.8",
     "author" : "Horacio Casatti <horacio.casatti@mercadolibre.com>",
     "description" : "Mercadopago SDK module for Payments integration",
     "main": "./lib/mercadopago.js",
