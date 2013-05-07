@@ -5,7 +5,7 @@
   "author": "hcasatti <horacio.casatti@mercadolibre.com>",
   "license": "BSD",
   "dependencies": {
-    "mercadopago": ">=0.0.9",
+    "mercadopago": "~0.2.0",
     "jade": ">=0.27.0",
     "express": ">=3.0.0",
     "MD5": ">= 1.0.0"
