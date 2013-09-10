@@ -1,4 +1,4 @@
-var MP      = require("mercadopago"),
+var MP      = require("../lib/mercadopago"),
     vows    = require("vows"),
     assert  = require("assert"),
     events  = require("events");
@@ -12,7 +12,7 @@ var data = {
 };
 
 vows
-    .describe("Unit Tests")
+    .describe("mercadopago")
     .addBatch({
         "Get Preference": {
             topic: function () {
