@@ -4,6 +4,9 @@
     "author" : "Horacio Casatti <horacio.casatti@mercadolibre.com>",
     "description" : "Mercadopago SDK module for Payments integration",
     "main": "./lib/mercadopago.js",
+    "scripts":{
+        "test": "node ./tests/unitTest"
+    },
     "repository": {
       "type": "git",
       "url": "https://github.com/mercadopago/sdk-nodejs.git"

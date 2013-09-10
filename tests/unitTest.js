@@ -7,42 +7,27 @@ var credentials = {
     clientId: "CLIENT_ID",
     clientSecret: "CLIENT_SECRET"
 };
-var data = {
-    prefId: "PREF_ID"
+
+var preference = {
+  "items": [
+    {
+      "title": "sdk-nodejs",
+      "quantity": 1,
+      "currency_id": "ARS",
+      "unit_price": 10.5
+    }
+  ]
 };
 
 vows
     .describe("mercadopago")
     .addBatch({
-        "Get Preference": {
-            topic: function () {
-                var _self = this;
-
-                var mp = new MP(credentials.clientId, credentials.clientSecret);
-
-                mp.getPreference(data.prefId, _self.callback);
-            },
-            "status 200": function (err, resp) {
-                assert.equal(resp.status, 200);
-            }
-        },
+        
         "Create Preference": {
             topic: function () {
                 var _self = this;
 
                 var mp = new MP(credentials.clientId, credentials.clientSecret);
-
-                var preference = {
-                  "items": [
-                    {
-                      "title": "sdk-nodejs",
-                      "quantity": 1,
-                      "currency_id": "ARS",
-                      "unit_price": 10.5
-                    }
-                  ]
-                };
-
                 mp.createPreference(preference, _self.callback);
             },
             "status 201": function (err, resp) {
@@ -57,6 +42,19 @@ vows
                 assert.equal(resp.response.items[0].quantity, 1);
                 assert.equal(resp.response.items[0].unit_price, 10.5);
                 assert.equal(resp.response.items[0].currency_id, "ARS");
+            }
+        },
+        "Get Preference": {
+            topic: function () {
+                var _self = this;
+
+                var mp = new MP(credentials.clientId, credentials.clientSecret);
+                mp.createPreference(preference, function (err, resp) {
+                    mp.getPreference(resp.response.id, _self.callback);
+                });
+            },
+            "status 200": function (err, resp) {
+                assert.equal(resp.status, 200);
             }
         },
         "Update Preference": {
