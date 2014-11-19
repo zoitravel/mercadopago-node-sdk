@@ -18,7 +18,7 @@
       , "integration"
     ],
     "dependencies" : {
-        "request": ">=2.11.4"
+        "request": ">=2.48.0"
     },
     "engine" : {
         "node" : ">=0.6"
