@@ -1,26 +1,27 @@
 {
-    "name" : "mercadopago",
-    "version" : "0.2.2",
-    "author" : "Horacio Casatti <horacio.casatti@mercadolibre.com>",
-    "description" : "Mercadopago SDK module for Payments integration",
-    "main": "./lib/mercadopago.js",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/mercadopago/sdk-nodejs.git"
-    },
-    "keywords": [
-        "api"
-      , "mercadopago"
-      , "checkout"
-      , "payment"
-      , "ipn"
-      , "sdk"
-      , "integration"
-    ],
-    "dependencies" : {
-        "request": ">=2.48.0"
-    },
-    "engine" : {
-        "node" : ">=0.6"
-    }
+  "name": "mercadopago",
+  "version": "0.3.0",
+  "author": "Horacio Casatti <horacio.casatti@mercadolibre.com>",
+  "description": "Mercadopago SDK module for Payments integration",
+  "main": "./lib/mercadopago.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mercadopago/sdk-nodejs.git"
+  },
+  "keywords": [
+    "api",
+    "mercadopago",
+    "checkout",
+    "payment",
+    "ipn",
+    "sdk",
+    "integration"
+  ],
+  "dependencies": {
+    "q": ">=1.1.2",
+    "request": ">=2.48.0"
+  },
+  "engine": {
+    "node": ">=0.6"
+  }
 }
