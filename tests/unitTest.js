@@ -22,7 +22,6 @@ var preference = {
 vows
     .describe("mercadopago")
     .addBatch({
-        
         "Create Preference": {
             topic: function () {
                 var _self = this;
