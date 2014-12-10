@@ -178,6 +178,8 @@ mp.cancelPayment ("ID");
 mp.refundPayment ("ID");
 ```
 
+<a href=http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion> About Cancel & Refund </a>
+
 ### Generic resources methods
 
 You can access any other resource from the MercadoPago API using the generic methods:
@@ -201,5 +203,3 @@ mp.get ("/sites", null, false)
         console.log (sites);
     });
 ```
-
-<a href=http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion> About Cancel & Refund </a>
