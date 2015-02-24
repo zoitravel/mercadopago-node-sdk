@@ -29,6 +29,17 @@ vows
                 assert.notEqual(credentials.clientId, "CLIENT_SECRET");
             }
         },
+        "Long Live access token": {
+            topic: function () {
+                var _self = this;
+
+                var mp = new MP("LONG_LIVE_ACCESS_TOKEN");
+                mp.getAccessToken(_self.callback);
+            },
+            "LLAT configured": function (llAT) {
+                assert.equal(llAT, "LONG_LIVE_ACCESS_TOKEN");
+            }
+        },
         "Create Preference": {
             topic: function () {
                 var _self = this;
