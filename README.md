@@ -11,6 +11,8 @@
 $ npm install mercadopago
 ```
 
+### ...with your credentials:
+
 * Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
     * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
     * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
@@ -22,6 +24,14 @@ $ npm install mercadopago
 var MP = require ("mercadopago");
 
 var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
+```
+
+### ...with your long live access token:
+
+```javascript
+var MP = require ("mercadopago");
+
+var mp = new MP ("LL_ACCESS_TOKEN");
 ```
 
 ### Promises and Callbacks support
@@ -193,6 +203,9 @@ mp.post ("/resource/uri", data, [params]);
 
 // Update a resource with "data" and optional URL params.
 mp.put ("/resource/uri", data, [params]);
+
+// Delete a resource with optional URL params.
+mp.delete ("/resource/uri", [params]);
 ```
 
  For example, if you want to get the Sites list (no params and no authentication):
