@@ -22,6 +22,13 @@ var preference = {
 vows
     .describe("mercadopago")
     .addBatch({
+        "Configure credentials": {
+            topic: credentials,
+            "credentials configured": function (credentials) {
+                assert.notEqual(credentials.clientId, "CLIENT_ID");
+                assert.notEqual(credentials.clientId, "CLIENT_SECRET");
+            }
+        },
         "Create Preference": {
             topic: function () {
                 var _self = this;
