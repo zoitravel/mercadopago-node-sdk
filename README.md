@@ -177,7 +177,7 @@ mp.post ("/v1/payments", payment_data)
 ### Create customer
 
 ```javascript
-mp.post ("/v1/customers", array("email" => "email@test.com"))
+mp.post ("/v1/customers", {"email": "email@test.com"})
     then (...);
 ```
 
