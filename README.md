@@ -1,37 +1,15 @@
 # MercadoPago SDK module for Payments integration
 
-* [Usage](#usage)
-* [Using MercadoPago Checkout](#checkout)
-* [Using MercadoPago Payment collection](#payments)
+* [Install](#install)
+* [Basic checkout](#basic-checkout)
+* [Customized checkout](#custom-checkout)
+* [Generic methods](#generic-methods)
 
-<a name="usage"></a>
-## Usage:
+<a name="install"></a>
+## Install
 
 ```
 $ npm install mercadopago
-```
-
-### ...with your credentials:
-
-* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
-    * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
-    * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
-    * México: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
-    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
-    * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
-
-```javascript
-var MP = require ("mercadopago");
-
-var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
-```
-
-### ...with your long live access token:
-
-```javascript
-var MP = require ("mercadopago");
-
-var mp = new MP ("LL_ACCESS_TOKEN");
 ```
 
 ### Promises and Callbacks support
@@ -63,17 +41,34 @@ mp.getAccessToken(function (err, accessToken){
 
 In order to use callbacks, simply pass a function as the last parameter.
 
+<a name="basic-checkout"></a>
+## Basic checkout
 
-### Get your Access Token:
+### Configure your credentials
+
+* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
+    * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
+    * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
+    * México: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
+    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
+    * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
 
 ```javascript
-mp.getAccessToken();
+var MP = require ("mercadopago");
+
+var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
 <a name="checkout"></a>
 ## Using MercadoPago Checkout
 
-### Create a Checkout preference:
+### Get an existent Checkout preference
+
+```javascript
+mp.getPreference ("PREFERENCE_ID");
+```
+
+### Create a Checkout preference
 
 ```javascript
 var preference = {
@@ -88,14 +83,6 @@ var preference = {
     };
 
 mp.createPreference (preference);
-```
-
-<a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
-
-### Get an existent Checkout preference:
-
-```javascript
-mp.getPreference ("PREFERENCE_ID");
 ```
 
 ### Update an existent Checkout preference:
@@ -115,10 +102,9 @@ var preference = {
 mp.updatePreference ("PREFERENCE_ID", preference);
 ```
 
-<a name="payments"></a>
-## Using MercadoPago Payment
+### Payments/Collections
 
-Searching:
+#### Search for payments
 
 ```javascript
 var filters = {
@@ -127,70 +113,91 @@ var filters = {
         "external_reference": null
     };
 
-mp.searchPayment (filters);
+mp.searchPayment (filters)
+    .then (
+        function success (data) {
+            console.log (JSON.stringify (data, null, 4));
+        },
+        function error (err) {
+            console.log (err);
+        }
+    });
 ```
 
-
-<a href="http://developers.mercadopago.com/documentacion/busqueda-de-pagos-recibidos">More search examples</a>
-
-### Receiving IPN notification:
-
-* Go to **Mercadopago IPN configuration**:
-    * Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
-    * Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
-    * México: [https://www.mercadopago.com/mlm/herramientas/notificaciones](https://www.mercadopago.com/mlm/herramientas/notificaciones)
-    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/notificaciones](https://www.mercadopago.com/mlv/herramientas/notificaciones)
-    * Colombia: [https://www.mercadopago.com/mco/herramientas/notificaciones](https://www.mercadopago.com/mco/herramientas/notificaciones)<br />
+#### Get payment data
 
 ```javascript
-var MP = require ("mercadopago"),
-    http = require("http"),
-    url = require('url');
-
-var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
-
-function onRequest(request, response) {
-    var qs = url.parse (request.url, true).query;
-
-    mp.getPayment (qs["id"])
-        .then (
-            function success (data) {
-                console.log (JSON.stringify (data, null, 4));
-                response.writeHead(200, {
-                    'Content-Type' : 'application/json; charset=utf-8'
-                });
-                response.write (JSON.stringify (data));
-                response.end();
-            },
-            function error (err) {
-                console.log (err);
-                response.writeHead(200, {
-                    'Content-Type' : 'application/json; charset=utf-8'
-                });
-                response.write (err);
-                response.end();
-            }
-        });
-}
-
-http.createServer(onRequest).listen(8888);
+mp.getPayment (qs["id"])
+    .then (
+        function success (data) {
+            console.log (JSON.stringify (data, null, 4));
+        },
+        function error (err) {
+            console.log (err);
+        }
+    });
 ```
 
-### Cancel (only for pending payments):
+#### Cancel (only for pending payments)
 
 ```javascript
 mp.cancelPayment ("ID");
 ```
 
-### Refund (only for accredited payments):
+#### Refund (only for accredited payments)
 
 ```javascript
 mp.refundPayment ("ID");
 ```
 
-<a href=http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion> About Cancel & Refund </a>
+<a name="custom-checkout"></a>
+## Customized checkout
 
-### Generic resources methods
+### Configure your credentials
+
+* Get your **ACCESS_TOKEN** in the following address:
+    * Argentina: [https://www.mercadopago.com/mla/account/credentials](https://www.mercadopago.com/mla/account/credentials)
+    * Brazil: [https://www.mercadopago.com/mlb/account/credentials](https://www.mercadopago.com/mlb/account/credentials)
+    * Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
+    * Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
+    * Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
+
+```javascript
+var MP = require ("mercadopago");
+
+var mp = new MP ("ACCESS_TOKEN");
+```
+
+### Create payment
+
+```javascript
+mp.post ("/v1/payments", payment_data)
+    .then (...);
+```
+
+### Create customer
+
+```javascript
+mp.post ("/v1/customers", array("email" => "email@test.com"))
+    then (...);
+```
+
+### Get customer
+
+```javascript
+mp.get ("/v1/customers/CUSTOMER_ID")
+    .then (...);
+```
+
+* View more Custom checkout related APIs in Developers Site
+    * Argentina: [https://labs.mercadopago.com.ar/developers](https://labs.mercadopago.com.ar/developers)
+    * Brazil: [https://labs.mercadopago.com.br/developers](https://labs.mercadopago.com.br/developers)
+    * Mexico: [https://labs.mercadopago.com.mx/developers](https://labs.mercadopago.com.mx/developers)
+    * Venezuela: [https://labs.mercadopago.com.ve/developers](https://labs.mercadopago.com.ve/developers)
+    * Colombia: [https://labs.mercadopago.com.co/developers](https://labs.mercadopago.com.co/developers)
+
+<a name="generic-methods"></a>
+## Generic methods
 
 You can access any other resource from the MercadoPago API using the generic methods:
 
