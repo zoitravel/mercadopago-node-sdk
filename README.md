@@ -59,16 +59,15 @@ var MP = require ("mercadopago");
 var mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
-<a name="checkout"></a>
-## Using MercadoPago Checkout
+### Preferences
 
-### Get an existent Checkout preference
+#### Get an existent Checkout preference
 
 ```javascript
 mp.getPreference ("PREFERENCE_ID");
 ```
 
-### Create a Checkout preference
+#### Create a Checkout preference
 
 ```javascript
 var preference = {
@@ -85,7 +84,7 @@ var preference = {
 mp.createPreference (preference);
 ```
 
-### Update an existent Checkout preference:
+#### Update an existent Checkout preference:
 
 ```javascript
 var preference = {
