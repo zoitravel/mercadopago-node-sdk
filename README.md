@@ -179,7 +179,7 @@ mp.post ("/v1/payments", payment_data)
 
 ```javascript
 mp.post ("/v1/customers", {"email": "email@test.com"})
-    then (...);
+    .then (...);
 ```
 
 ### Get customer
