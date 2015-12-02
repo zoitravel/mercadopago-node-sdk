@@ -26,8 +26,7 @@
     },
     "devDependencies": {
         "istanbul": "^0.3.17",
-        "mocha": "^2.2.5",
-        "rewire": "^2.3.4"
+        "mocha": "^2.2.5"
     },
     "engine": {
         "node": ">=0.6"
