@@ -171,22 +171,29 @@ var mp = new MP ("ACCESS_TOKEN");
 ### Create payment
 
 ```javascript
-mp.post ("/v1/payments", payment_data)
-    .then (...);
+mp.post ({
+    "uri": "/v1/payments",
+    "data": payment_data
+}).then (...);
 ```
 
 ### Create customer
 
 ```javascript
-mp.post ("/v1/customers", {"email": "email@test.com"})
-    .then (...);
+mp.post ({
+    "uri": "/v1/customers",
+    "data": {
+        "email": "email@test.com"
+    }
+}).then (...);
 ```
 
 ### Get customer
 
 ```javascript
-mp.get ("/v1/customers/CUSTOMER_ID")
-    .then (...);
+mp.get ({
+    "uri": "/v1/customers/CUSTOMER_ID"
+}).then (...);
 ```
 
 * View more Custom checkout related APIs in Developers Site
@@ -199,27 +206,61 @@ mp.get ("/v1/customers/CUSTOMER_ID")
 <a name="generic-methods"></a>
 ## Generic methods
 
-You can access any other resource from the MercadoPago API using the generic methods:
+You can access any resource from the [MercadoPago API](https://api.mercadopago.com) using the generic methods.
+The basic structure is:
+
+`mp.method(request).then(...)`
+
+where `request` can be:
+
+```javascript
+{
+    "uri": "The resource URI, relative to https://api.mercadopago.com",
+    "params": "Optional. Key:Value object with parameters to be appended to the URL",
+    "data": "Optional. Object or String to be sent in POST and PUT requests",
+    "headers": "Optional. Key:Value object with custom headers, like content-type: application/x-www-form-urlencoded",
+    "authenticate": "Optional. Boolean to specify if the GET method has to authenticate with credentials before request. Set it to false when accessing public APIs"
+}
+```
+
+Examples:
 
 ```javascript
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
-mp.get ("/resource/uri", [params], [authenticate=true]);
+mp.get ({
+    "uri": "/resource/uri",
+    "params": {params},
+    "authenticate": true
+});
 
 // Create a resource with "data" and optional URL params.
-mp.post ("/resource/uri", data, [params]);
+mp.post ({
+    "uri": "/resource/uri",
+    "data": data,
+    "params": {params}
+});
 
 // Update a resource with "data" and optional URL params.
-mp.put ("/resource/uri", data, [params]);
+mp.put ({
+    "uri": "/resource/uri",
+    "data": data,
+    "params": {params}
+});
 
 // Delete a resource with optional URL params.
-mp.delete ("/resource/uri", [params]);
+mp.delete ({
+    "uri": "/resource/uri",
+    "params": {params}
+});
 ```
 
  For example, if you want to get the Sites list (no params and no authentication):
 
 ```javascript
-mp.get ("/sites", null, false)
-    .then (function (sites) {
-        console.log (sites);
-    });
+mp.get ({
+    "uri": "/sites",
+    "authenticate": false
+}).then (function (sites) {
+    console.log (sites);
+});
 ```
