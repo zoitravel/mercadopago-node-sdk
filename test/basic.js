@@ -12,19 +12,17 @@ describe("Basic", function () {
     	}
 
     	it("Should throw an exception because wrong parameters", function() {
-    		assert.throws(
-	    		instantiate,
-	    		MercadoPagoError,
-	    		"Error thrown"
-	    	);
+    		assert.throws(instantiate, MercadoPagoError, "Error thrown");
     	});
     });
 
 	describe("Long Live Access Token", function() {
-		var mp = new MP(credentials.access_token);
+		let mp = new MP(credentials.access_token);
 
-		it("Should return the access_token", function () {
-			assert.equal (mp.getAccessToken(), credentials.access_token);
+		it("Should return the access_token", function (done) {
+		  mp.getAccessToken()
+        .then((res) => assert.equal (res, credentials.access_token))
+        .then(done);
 		});
 	});
 });
