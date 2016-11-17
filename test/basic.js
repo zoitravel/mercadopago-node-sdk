@@ -1,7 +1,9 @@
-var MP = require("../lib/mercadopago"),
-	MercadoPagoError = MP.MercadoPagoError,
-	assert = require("assert"),
-	credentials = require("./credentials");
+"use strict";
+
+const MP = require("../lib/mercadopago");
+const MercadoPagoError = MP.MercadoPagoError;
+const assert = require("assert");
+const credentials = require("./credentials");
 
 process.setMaxListeners(0);
 

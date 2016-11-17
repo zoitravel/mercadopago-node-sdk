@@ -1,25 +1,27 @@
-var MP = require("../lib/mercadopago"),
-	assert = require("assert"),
-	credentials = require("./credentials");
+"use strict";
+
+const MP = require("../lib/mercadopago");
+const assert = require("assert");
+const credentials = require("./credentials");
+const _ = require('lodash');
 
 process.setMaxListeners(0);
 
 describe("Preferences", function(){
-	var mp;
-	
+	let mp;
+
 	before ("Instantitate MP", function () {
 		mp = new MP(credentials.client_id, credentials.client_secret);
 	});
 
 	it("Should create, get and update a preference", function(done) {
-		this.timeout(10000);
+		this.timeout(1000);
 
-		var preferenceData = {
+		let preferenceData = {
 			"items": [
 				{
 					"title": "test1",
 					"quantity": 1,
-					"currency_id": "ARS",
 					"unit_price": 10.2
 				}
 			]
@@ -29,12 +31,15 @@ describe("Preferences", function(){
 			function (preference) {
 				try {
 					assert.equal(preference.status, 201);
-
 					assert.equal(preference.response.items[0].title, "test1", "Preference title");
 					assert.equal(preference.response.items[0].quantity, 1, "Preference quantity");
 					assert.equal(preference.response.items[0].unit_price, 10.2, "Preference price");
-					assert.equal(preference.response.items[0].currency_id, "ARS", "Preference currency");
-				} catch(e) {
+					assert.equal(
+					  _.includes(['ARS','BRL','VEF','CLP','MXN','COP','PEN','UYU'],
+                        preference.response.items[0].currency_id),
+            true,
+            "Preference currency");
+        } catch(e) {
 					return done(e);
 				}
 
@@ -46,7 +51,7 @@ describe("Preferences", function(){
 							return done(e);
 						}
 
-						var preferenceData = {
+						let preferenceData = {
 							"items": [
 								{
 									"title": "test2Modified",

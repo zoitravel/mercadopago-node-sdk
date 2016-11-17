@@ -1,31 +1,33 @@
-var MP = require("../lib/mercadopago"),
-	assert = require("assert"),
-	credentials = require("./credentials");
+"use strict";
+
+const MP = require("../lib/mercadopago");
+const assert = require("assert");
+const credentials = require("./credentials");
 
 process.setMaxListeners(0);
 
 describe("Preapproval", function(){
-	var mp;
-	
+	let mp;
+
 	before ("Instantitate MP", function () {
 		mp = new MP(credentials.client_id, credentials.client_secret);
 	});
 
 	it("Should create, get and update a preapproval", function(done) {
-		this.timeout(10000);
+		this.timeout(1000);
 
-		var preferenceData = {
-            "payer_email": "my_customer@my_site.com",
-            "back_url": "https://www.testpreapproval.com/back_url",
-            "reason": "Preapproval preference",
-            "external_reference": "OP-1234",
-            "auto_recurring": {
-                "frequency": 1,
-                "frequency_type": "months",
-                "transaction_amount": 60,
-                "currency_id": "ARS"
-            }
-		};
+    let preferenceData = {
+      "payer_email": "my_customer@my_site.com",
+      "back_url": "https://www.testpreapproval.com/back_url",
+      "reason": "Preapproval preference",
+      "external_reference": "OP-1234",
+      "auto_recurring": {
+        "frequency": 1,
+        "frequency_type": "months",
+        "transaction_amount": 60,
+        "currency_id": "ARS"
+      }
+    };
 
 		mp.createPreapprovalPayment(preferenceData).then(
 			function (preference) {
