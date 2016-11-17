@@ -1,7 +1,6 @@
 var MP = require("../lib/mercadopago"),
 	MercadoPagoError = MP.MercadoPagoError,
 	assert = require("assert"),
-	Q = require("q"),
 	credentials = require("./credentials");
 
 process.setMaxListeners(0);
@@ -10,7 +9,7 @@ describe("Generic methods", function(){
 	this.timeout(10000);
 
 	var mp;
-	
+
 	before ("Instantitate MP", function () {
 		mp = new MP(credentials.client_id, credentials.client_secret);
 	});
@@ -49,7 +48,7 @@ describe("Generic methods", function(){
 				done();
 			} catch (e) {
 				done(e);
-			}			
+			}
 		});
 	});
 
@@ -112,7 +111,7 @@ describe("Generic methods", function(){
 						done();
 					} catch (e) {
 						done(e);
-					}	       			
+					}
 	       		}, done)
 	       	}, done)
 		}, done);
@@ -129,7 +128,7 @@ describe("Generic methods", function(){
             },
             "authenticate": false
         };
-		
+
 		mp.post(request).then(function (customer) {
 			try {
 				assert.equal(customer.status, 201, "Create customer");
