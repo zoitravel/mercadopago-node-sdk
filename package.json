@@ -1,34 +1,42 @@
 {
-    "name": "mercadopago",
-    "version": "0.5.0",
-    "author": "Horacio Casatti <horacio.casatti@mercadolibre.com>",
-    "description": "Mercadopago SDK module for Payments integration",
-    "main": "./lib/mercadopago.js",
-    "scripts": {
-        "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mercadopago/sdk-nodejs.git"
-    },
-    "keywords": [
-        "api",
-        "mercadopago",
-        "checkout",
-        "payment",
-        "ipn",
-        "sdk",
-        "integration"
-    ],
-    "dependencies": {
-        "q": ">=1.1.2",
-        "request": ">=2.48.0"
-    },
-    "devDependencies": {
-        "istanbul": "^0.3.17",
-        "mocha": "^2.2.5"
-    },
-    "engine": {
-        "node": ">=0.6"
+  "name": "mercadopago",
+  "version": "0.5.0",
+  "author": "Horacio Casatti <horacio.casatti@mercadolibre.com>",
+  "description": "Mercadopago SDK module for Payments integration",
+  "main": "./lib/mercadopago.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrcastillo/sdk-nodejs.git"
+  },
+  "license": "UNLICENSED",
+  "contributors": [
+    {
+      "name": "Ramon Castillo",
+      "email": "jrcastillo200@gmail.com"
     }
+  ],
+  "keywords": [
+    "api",
+    "mercadopago",
+    "checkout",
+    "payment",
+    "ipn",
+    "sdk",
+    "integration"
+  ],
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "request": "^2.48.0",
+    "request-promise": "^4.1.1"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2"
+  },
+  "engine": {
+    "node": ">=6.9.1"
+  }
 }
