@@ -14,7 +14,7 @@ describe("Preapproval", function(){
 	});
 
 	it("Should create, get and update a preapproval", function(done) {
-		this.timeout(1000);
+		this.timeout(5000);
 
     let preferenceData = {
       "payer_email": "my_customer@my_site.com",
