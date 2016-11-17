@@ -11,6 +11,12 @@
         "type": "git",
         "url": "https://github.com/mercadopago/sdk-nodejs.git"
     },
+    "contributors": [
+      {
+        "name": "Ramon Castillo",
+        "email": "jrcastillo200@gmail.com"
+      }
+    ],
     "keywords": [
         "api",
         "mercadopago",
@@ -21,12 +27,12 @@
         "integration"
     ],
     "dependencies": {
-        "q": ">=1.1.2",
-        "request": ">=2.48.0"
+        "q": "^2.0.3",
+        "request": "^2.48.0"
     },
     "devDependencies": {
-        "istanbul": "^0.3.17",
-        "mocha": "^2.2.5"
+        "istanbul": "^0.4.5",
+        "mocha": "^3.1.2"
     },
     "engine": {
         "node": ">=0.6"
