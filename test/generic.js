@@ -3,7 +3,7 @@
 const MP = require("../lib/mercadopago");
 const MercadoPagoError = MP.MercadoPagoError;
 const assert = require("assert");
-const credentials = require("./credentials");
+const credentials = require("./../credentials");
 
 process.setMaxListeners(0);
 
@@ -13,7 +13,7 @@ describe("Generic methods", function(){
 	let mp;
 
 	before ("Instantitate MP", function () {
-		mp = new MP(credentials.client_id, credentials.client_secret);
+		mp = new MP(credentials.ACCESS_TOKEN);
 	});
 
 	it("Should get a resource without authorization", function(done) {
@@ -62,12 +62,8 @@ describe("Generic methods", function(){
     };
 
     let request = {
-      uri : '/v1/card_tokens',
-      params : {
-        public_key : credentials.public_key
-      },
-      data : data,
-      authenticate : false
+      uri : '/card_tokens',
+      data : data
     };
 
     mp.post(request)
@@ -84,15 +80,11 @@ describe("Generic methods", function(){
           installments : 1
         };
         let request = {
-          uri : '/v1/payments',
-          params : {
-            access_token : credentials.access_token
-          },
+          uri : '/payments',
           data,
           headers : {
             'x-idempotency-key' : "sdk-test-idempotency-dummy-key"
-          },
-          authenticate: false
+          }
         };
 
         mp.post(request)
@@ -108,29 +100,21 @@ describe("Generic methods", function(){
 
 	it("Should create and delete a customer", function(done) {
     let request = {
-      uri : "/v1/customers",
-      params : {
-        access_token : credentials.access_token
-      },
+      uri : "/customers",
       data : {
         email : "test_"+new Date().getTime()+"@localsdk.com",
         identification : {
           number : '1234567',
           type   : 'Otro'
         }
-      },
-      authenticate : false
+      }
     };
 
 		mp.post(request)
       .then((customer) => {
         assert.equal(customer.status, 201, "Create customer");
         let request = {
-          uri : "/v1/customers/" + customer.response.id,
-          params : {
-            access_token : credentials.access_token
-          },
-          authenticate : false
+          uri : "/customers/" + customer.response.id
         };
 
         mp.delete(request)

@@ -3,7 +3,7 @@
 const MP = require("../lib/mercadopago");
 const MercadoPagoError = MP.MercadoPagoError;
 const assert = require("assert");
-const credentials = require("./credentials");
+const credentials = require("./../credentials");
 
 process.setMaxListeners(0);
 
@@ -19,11 +19,11 @@ describe("Basic", function () {
     });
 
 	describe("Long Live Access Token", function() {
-		let mp = new MP(credentials.access_token);
+		let mp = new MP(credentials.ACCESS_TOKEN);
 
 		it("Should return the access_token", function (done) {
 		  mp.getAccessToken()
-        .then((res) => assert.equal (res, credentials.access_token))
+        .then((res) => assert.equal (res, credentials.ACCESS_TOKEN))
         .then(done);
 		});
 	});
