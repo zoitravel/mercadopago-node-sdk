@@ -62,12 +62,8 @@ describe("Generic methods", function(){
     };
 
     let request = {
-      uri : '/v1/card_tokens',
-      params : {
-        public_key : credentials.PUBLIC_KEY
-      },
-      data : data,
-      authenticate : false
+      uri : '/card_tokens',
+      data : data
     };
 
     mp.post(request)
@@ -84,15 +80,11 @@ describe("Generic methods", function(){
           installments : 1
         };
         let request = {
-          uri : '/v1/payments',
-          params : {
-            access_token : credentials.ACCESS_TOKEN
-          },
+          uri : '/payments',
           data,
           headers : {
             'x-idempotency-key' : "sdk-test-idempotency-dummy-key"
-          },
-          authenticate: false
+          }
         };
 
         mp.post(request)
@@ -108,29 +100,21 @@ describe("Generic methods", function(){
 
 	it("Should create and delete a customer", function(done) {
     let request = {
-      uri : "/v1/customers",
-      params : {
-        access_token : credentials.ACCESS_TOKEN
-      },
+      uri : "/customers",
       data : {
         email : "test_"+new Date().getTime()+"@localsdk.com",
         identification : {
           number : '1234567',
           type   : 'Otro'
         }
-      },
-      authenticate : false
+      }
     };
 
 		mp.post(request)
       .then((customer) => {
         assert.equal(customer.status, 201, "Create customer");
         let request = {
-          uri : "/v1/customers/" + customer.response.id,
-          params : {
-            access_token : credentials.ACCESS_TOKEN
-          },
-          authenticate : false
+          uri : "/customers/" + customer.response.id
         };
 
         mp.delete(request)
