@@ -2,17 +2,17 @@
 
 const MP = require("../lib/mercadopago");
 const assert = require("assert");
-const credentials = require("./credentials");
+const credentials = require("./../credentials");
 const casual = require('casual');
 const _ = require('lodash');
 
 process.setMaxListeners(0);
 
-describe.only("Basic payment operations", function(){
+describe("Basic payment operations", function(){
   let mp, paymentPayload, cardToken;
 
   before ("Instantitate MP", function () {
-    mp = new MP(credentials.access_token);
+    mp = new MP(credentials.ACCESS_TOKEN);
     paymentPayload = {
       "payer" : {
         "email": casual.email,

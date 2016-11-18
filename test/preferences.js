@@ -2,7 +2,7 @@
 
 const MP = require("../lib/mercadopago");
 const assert = require("assert");
-const credentials = require("./credentials");
+const credentials = require("./../credentials");
 const _ = require('lodash');
 
 process.setMaxListeners(0);
@@ -11,7 +11,7 @@ describe("Preferences", function(){
 	let mp;
 
 	before ("Instantitate MP", function () {
-		mp = new MP(credentials.client_id, credentials.client_secret);
+		mp = new MP(credentials.ACCESS_TOKEN);
 	});
 
 	it("Should create, get and update a preference", function(done) {

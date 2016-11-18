@@ -3,7 +3,7 @@
 const MP = require("../lib/mercadopago");
 const MercadoPagoError = MP.MercadoPagoError;
 const assert = require("assert");
-const credentials = require("./credentials");
+const credentials = require("./../credentials");
 
 process.setMaxListeners(0);
 
@@ -13,7 +13,7 @@ describe("Generic methods", function(){
 	let mp;
 
 	before ("Instantitate MP", function () {
-		mp = new MP(credentials.client_id, credentials.client_secret);
+		mp = new MP(credentials.ACCESS_TOKEN);
 	});
 
 	it("Should get a resource without authorization", function(done) {
@@ -64,7 +64,7 @@ describe("Generic methods", function(){
     let request = {
       uri : '/v1/card_tokens',
       params : {
-        public_key : credentials.public_key
+        public_key : credentials.PUBLIC_KEY
       },
       data : data,
       authenticate : false
@@ -86,7 +86,7 @@ describe("Generic methods", function(){
         let request = {
           uri : '/v1/payments',
           params : {
-            access_token : credentials.access_token
+            access_token : credentials.ACCESS_TOKEN
           },
           data,
           headers : {
@@ -110,7 +110,7 @@ describe("Generic methods", function(){
     let request = {
       uri : "/v1/customers",
       params : {
-        access_token : credentials.access_token
+        access_token : credentials.ACCESS_TOKEN
       },
       data : {
         email : "test_"+new Date().getTime()+"@localsdk.com",
@@ -128,7 +128,7 @@ describe("Generic methods", function(){
         let request = {
           uri : "/v1/customers/" + customer.response.id,
           params : {
-            access_token : credentials.access_token
+            access_token : credentials.ACCESS_TOKEN
           },
           authenticate : false
         };
