@@ -67,12 +67,27 @@ describe("Basic payment operations", function(){
 
   it("Should create a payment an approved payment", function(done) {
     this.timeout(5000);
-
+    _.set(cardToken,'cardholder.name', 'APRO');
     mp.createCardToken(cardToken)
       .tap((res) => paymentPayload.token = res.response.id)
       .then((res) => mp.createPayment(paymentPayload))
       .then((res) => {
         assert.equal(!_.isNil(res.response.id), true, 'payment created');
+        done();
+      })
+      .catch(console.log)
+  });
+
+  it("Should refund an approved payment", function(done) {
+    this.timeout(5000);
+    _.set(cardToken,'cardholder.name', 'APRO');
+    mp.createCardToken(cardToken)
+      .tap((res) => paymentPayload.token = res.response.id)
+      .then((res) => mp.createPayment(paymentPayload))
+      .then((res) => mp.completeRefundPayment(res.response.id))
+      .then((res) => {
+        assert.equal(res.status, 201, 'payment refunded');
+        assert.equal(!_.isNil(res.response.id), true, 'payment refunded');
         done();
       })
       .catch(console.log)
