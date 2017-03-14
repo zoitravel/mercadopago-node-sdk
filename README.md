@@ -53,6 +53,7 @@ In order to use callbacks, simply pass a function as the last parameter.
     * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
     * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
     * Chile: [https://www.mercadopago.com/mlc/herramientas/aplicaciones](https://www.mercadopago.com/mlc/herramientas/aplicaciones)
+    * Uruguay: [https://www.mercadopago.com/mlu/herramientas/aplicaciones](https://www.mercadopago.com/mlu/herramientas/aplicaciones)
 
 ```javascript
 var MP = require ("mercadopago");
@@ -161,6 +162,7 @@ mp.refundPayment ("ID");
     * Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
     * Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
     * Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
+    * Uruguay: [https://www.mercadopago.com/mlu/account/credentials](https://www.mercadopago.com/mlu/account/credentials)
 
 ```javascript
 var MP = require ("mercadopago");
@@ -202,6 +204,7 @@ mp.get ({
     * Mexico: [https://www.mercadopago.com.mx/developers](https://www.mercadopago.com.mx/developers)
     * Venezuela: [https://www.mercadopago.com.ve/developers](https://www.mercadopago.com.ve/developers)
     * Colombia: [https://www.mercadopago.com.co/developers](https://www.mercadopago.com.co/developers)
+    * Uruguay: [https://www.mercadopago.com.uy/developers](https://www.mercadopago.com.uy/developers)
 
 <a name="generic-methods"></a>
 ## Generic methods
